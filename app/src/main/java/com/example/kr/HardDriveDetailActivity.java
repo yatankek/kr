@@ -53,9 +53,9 @@ public class HardDriveDetailActivity extends AppCompatActivity {
                             Double price = document.getDouble("price");
 
                             if (model != null && capacity != null && price != null) {
-                                textViewModel.setText("Model: " + model);
-                                textViewCapacity.setText("Capacity: " + capacity + " GB");
-                                textViewPrice.setText("Price: $" + String.format("%.2f", price));
+                                textViewModel.setText("Название модели: " + model);
+                                textViewCapacity.setText("Ёмкость диска: " + capacity + " GB");
+                                textViewPrice.setText("Цена: $" + String.format("%.2f", price));
                             } else {
                                 Toast.makeText(this, "Ошибка при загрузке данных.", Toast.LENGTH_SHORT).show();
                             }

@@ -42,6 +42,7 @@ public class ManufacturersActivity extends AppCompatActivity {
             intent.putExtra("manufacturerName", selectedManufacturer);
             startActivity(intent);
         });
+
     }
 
     private void getManufacturers() {

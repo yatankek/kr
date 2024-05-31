@@ -116,7 +116,7 @@ public class HardDriveActivity extends AppCompatActivity {
     }
 
     private void showFilterDialog() {
-        String[] filterOptions = {"Price (Low to High)", "Price (High to Low)", "Capacity (Low to High)", "Capacity (High to Low)", "Alphabetical"};
+        String[] filterOptions = {"Цена по возрастанию", "Цены по убыванию", "Ёмкость диска по возрастанию", "Ёмкость диска по убыванию", "По алфавиту"};
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Выберите фильтр")
                 .setItems(filterOptions, (dialog, which) -> {

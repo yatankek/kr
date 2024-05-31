@@ -1,19 +1,20 @@
 package com.example.kr;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.Button;
+import android.view.MenuItem;
+import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
+import com.example.kr.R;
 
 public class HomeActivity extends AppCompatActivity {
 
-    private Button btnManufacturers;
-    private Button btnLogout;
     private FirebaseAuth mAuth;
-    private SharedPreferences sharedPreferences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,22 +22,19 @@ public class HomeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_home);
 
         mAuth = FirebaseAuth.getInstance();
-        sharedPreferences = getSharedPreferences("com.example.kr", MODE_PRIVATE);
 
-        btnManufacturers = findViewById(R.id.btnManufacturers);
-        btnLogout = findViewById(R.id.btnLogout);
-
-        btnManufacturers.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+        BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
+        bottomNavigationView.setOnNavigationItemSelectedListener(item -> {
+            int itemId = item.getItemId();
+            if (itemId == R.id.action_manufacturers) {
                 openManufacturersActivity();
-            }
-        });
-
-        btnLogout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+                return true;
+            } else if (itemId == R.id.action_logout) {
                 logoutUser();
+                return true;
+            } else {
+                Toast.makeText(HomeActivity.this, "Выбран пункт меню с id: " + itemId, Toast.LENGTH_SHORT).show();
+                return false;
             }
         });
     }
@@ -47,14 +45,15 @@ public class HomeActivity extends AppCompatActivity {
     }
 
     private void logoutUser() {
-        mAuth.signOut();
-        // Clear "Remember Me" preference
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putBoolean("rememberMe", false);
-        editor.apply();
-
-        Intent intent = new Intent(HomeActivity.this, MainActivity.class);
-        startActivity(intent);
-        finish(); // Закрываем HomeActivity, чтобы пользователь не мог вернуться назад
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setMessage("Вы уверены, что хотите выйти?")
+                .setPositiveButton("Да", (dialog, which) -> {
+                    mAuth.signOut();
+                    Intent intent = new Intent(HomeActivity.this, MainActivity.class);
+                    startActivity(intent);
+                    finish(); // Закрываем HomeActivity, чтобы пользователь не мог вернуться назад
+                })
+                .setNegativeButton("Отмена", null)
+                .show();
     }
 }
