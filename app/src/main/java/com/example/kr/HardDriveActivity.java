@@ -106,8 +106,17 @@ public class HardDriveActivity extends AppCompatActivity {
     }
 
     private void filterHardDrives(String query) {
-        adapter.getFilter().filter(query);
+        List<HardDrive> filteredList = new ArrayList<>();
+        for (HardDrive hardDrive : hardDriveList) {
+            if (hardDrive.getModel().toLowerCase().contains(query.toLowerCase())) {
+                filteredList.add(hardDrive);
+            }
+        }
+        adapter.clear();
+        adapter.addAll(filteredList);
+        adapter.notifyDataSetChanged();
     }
+
 
     private void showFilterDialog() {
         String[] filterOptions = {"Price (Low to High)", "Price (High to Low)", "Capacity (Low to High)", "Capacity (High to Low)", "Alphabetical"};
@@ -158,6 +167,7 @@ public class HardDriveActivity extends AppCompatActivity {
         adapter.notifyDataSetChanged();
     }
 
+
     private static class HardDrive {
         private String model;
         private long capacity;
@@ -188,4 +198,3 @@ public class HardDriveActivity extends AppCompatActivity {
         }
     }
 }
-
