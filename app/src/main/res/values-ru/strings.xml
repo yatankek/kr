@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name"> </string>
+    <string name="russian">русский</string>
+    <string name="english">английский</string>
+    <string name="pricehigh">Цена по возрастанию</string>
+    <string name="model">модель </string>
+</resources>

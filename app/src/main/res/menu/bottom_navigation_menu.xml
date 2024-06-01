@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/action_manufacturers"
+        android:title="Производители"
+        android:icon="@drawable/ic_manufacturers" />
+    <item
+        android:id="@+id/action_logout"
+        android:title="Выход"
+        android:icon="@drawable/ic_logout" />
+    <item
+        android:id="@+id/action_language"
+        android:title="Язык"
+        android:icon="@drawable/ic_language" />
+    <item
+        android:id="@+id/action_theme"
+        android:title="Тема"
+        android:icon="@drawable/ic_theme" />
+</menu>

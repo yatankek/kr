@@ -1,0 +1,47 @@
+<resources>
+    <!-- Base application theme -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!-- Customize your theme here -->
+        <item name="colorPrimary">@color/white</item>
+        <item name="colorPrimaryDark">@color/black</item>
+        <item name="colorAccent">@color/white</item>
+        <item name="windowNoTitle">true</item>
+        <item name="windowActionBar">false</item>
+    </style>
+
+    <style name="Theme.Red.Dark" parent="Theme.AppCompat.DayNight.DarkActionBar">
+        <item name="colorPrimary">@color/red_700</item>
+        <item name="colorPrimaryDark">@color/red_900</item>
+        <item name="colorAccent">@color/red_200</item>
+    </style>
+
+    <style name="Theme.Red.Light" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="colorPrimary">@color/red_500</item>
+        <item name="colorPrimaryDark">@color/red_700</item>
+        <item name="colorAccent">@color/red_200</item>
+        <item name="buttonStyle">@style/WhiteButtonStyle</item>
+    </style>
+
+    <style name="Theme.Brown.Dark" parent="Theme.AppCompat.DayNight.DarkActionBar">
+        <item name="colorPrimary">@color/brown_700</item>
+        <item name="colorPrimaryDark">@color/brown_900</item>
+        <item name="colorAccent">@color/brown_200</item>
+    </style>
+
+    <style name="Theme.Brown.Light" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="colorPrimary">@color/brown_500</item>
+        <item name="colorPrimaryDark">@color/brown_700</item>
+        <item name="colorAccent">@color/brown_200</item>
+        <item name="buttonStyle">@style/WhiteButtonStyle</item>
+    </style>
+
+    <style name="WhiteButtonStyle" parent="Widget.AppCompat.Button">
+        <item name="android:textColor">@android:color/white</item>
+    </style>
+
+    <style name="AlertTheme" parent="Theme.AppCompat.Dialog.Alert">
+    <item name="android:background">#ffffff</item>
+    <item name="android:textColor">#212121</item>
+    <item name="android:textColorPrimary">#212121</item>
+    </style>
+</resources>
