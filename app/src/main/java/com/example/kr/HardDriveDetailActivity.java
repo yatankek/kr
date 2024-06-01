@@ -9,12 +9,15 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 
-public class HardDriveDetailActivity extends AppCompatActivity {
+import java.util.Locale;
+
+public class HardDriveDetailActivity extends BaseActivity {
 
     private static final String TAG = "HardDriveDetailActivity";
     private TextView textViewModel;
     private TextView textViewCapacity;
     private TextView textViewPrice;
+    private TextView textViewDescription;
     private FirebaseFirestore db;
 
     @Override
@@ -25,6 +28,7 @@ public class HardDriveDetailActivity extends AppCompatActivity {
         textViewModel = findViewById(R.id.textViewModel);
         textViewCapacity = findViewById(R.id.textViewCapacity);
         textViewPrice = findViewById(R.id.textViewPrice);
+        textViewDescription = findViewById(R.id.textViewDescription);
 
         db = FirebaseFirestore.getInstance();
 
@@ -52,10 +56,22 @@ public class HardDriveDetailActivity extends AppCompatActivity {
                             Long capacity = document.getLong("capacity");
                             Double price = document.getDouble("price");
 
-                            if (model != null && capacity != null && price != null) {
+                            String language = getResources().getConfiguration().locale.getLanguage();
+
+                            String descriptionField;
+                            if (language.equals("ru")) {
+                                descriptionField = "descru";
+                            } else {
+                                descriptionField = "descen";
+                            }
+
+                            String description = document.getString(descriptionField);
+
+                            if (model != null && capacity != null && price != null && description != null) {
                                 textViewModel.setText("Название модели: " + model);
                                 textViewCapacity.setText("Ёмкость диска: " + capacity + " GB");
                                 textViewPrice.setText("Цена: $" + String.format("%.2f", price));
+                                textViewDescription.setText("Описание: " + description);
                             } else {
                                 Toast.makeText(this, "Ошибка при загрузке данных.", Toast.LENGTH_SHORT).show();
                             }

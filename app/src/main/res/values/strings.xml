@@ -1,3 +1,7 @@
 <resources>
-    <string name="app_name">kr</string>
+    <string name="app_name"> </string>
+    <string name="russian">russian</string>
+    <string name="english">english</string>
+    <string name="pricehigh">price ascending</string>
+    <string name="model">model </string>
 </resources>

@@ -8,6 +8,8 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Button;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.widget.CompoundButtonCompat;
@@ -25,7 +27,7 @@ public class HardDriveActivity extends AppCompatActivity {
 
     private static final String TAG = "HardDriveActivity";
     private ListView listView;
-    private ArrayAdapter<String> adapter;
+    private ArrayAdapter<HardDrive> adapter;
     private List<HardDrive> hardDriveList;
     private FirebaseFirestore db;
     private String manufacturerName;
@@ -43,7 +45,7 @@ public class HardDriveActivity extends AppCompatActivity {
         buttonFilter = findViewById(R.id.buttonFilter);
 
         hardDriveList = new ArrayList<>();
-        adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, new ArrayList<>());
+        adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, hardDriveList);
         listView.setAdapter(adapter);
 
         db = FirebaseFirestore.getInstance();
@@ -104,19 +106,11 @@ public class HardDriveActivity extends AppCompatActivity {
     }
 
     private void filterHardDrives(String query) {
-        List<String> filteredList = new ArrayList<>();
-        for (HardDrive hardDrive : hardDriveList) {
-            if (hardDrive.getModel().toLowerCase().contains(query.toLowerCase())) {
-                filteredList.add(hardDrive.getModel());
-            }
-        }
-        adapter.clear();
-        adapter.addAll(filteredList);
-        adapter.notifyDataSetChanged();
+        adapter.getFilter().filter(query);
     }
 
     private void showFilterDialog() {
-        String[] filterOptions = {"Цена по возрастанию", "Цены по убыванию", "Ёмкость диска по возрастанию", "Ёмкость диска по убыванию", "По алфавиту"};
+        String[] filterOptions = {"Price (Low to High)", "Price (High to Low)", "Capacity (Low to High)", "Capacity (High to Low)", "Alphabetical"};
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Выберите фильтр")
                 .setItems(filterOptions, (dialog, which) -> {
@@ -147,7 +141,7 @@ public class HardDriveActivity extends AppCompatActivity {
         } else {
             Collections.sort(hardDriveList, (hd1, hd2) -> Double.compare(hd2.getPrice(), hd1.getPrice()));
         }
-        filterHardDrives(editTextSearch.getText().toString());
+        adapter.notifyDataSetChanged();
     }
 
     private void sortHardDrivesByCapacity(boolean ascending) {
@@ -156,12 +150,12 @@ public class HardDriveActivity extends AppCompatActivity {
         } else {
             Collections.sort(hardDriveList, (hd1, hd2) -> Long.compare(hd2.getCapacity(), hd1.getCapacity()));
         }
-        filterHardDrives(editTextSearch.getText().toString());
+        adapter.notifyDataSetChanged();
     }
 
     private void sortHardDrivesAlphabetically() {
         Collections.sort(hardDriveList, Comparator.comparing(HardDrive::getModel));
-        filterHardDrives(editTextSearch.getText().toString());
+        adapter.notifyDataSetChanged();
     }
 
     private static class HardDrive {
@@ -186,5 +180,12 @@ public class HardDriveActivity extends AppCompatActivity {
         public double getPrice() {
             return price;
         }
+
+        @NonNull
+        @Override
+        public String toString() {
+            return model + " | Capacity: " + capacity + " GB | Price: $" + price;
+        }
     }
 }
+

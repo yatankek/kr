@@ -14,7 +14,7 @@ import com.google.firebase.firestore.QueryDocumentSnapshot;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ManufacturersActivity extends AppCompatActivity {
+public class ManufacturersActivity extends BaseActivity {
 
     private static final String TAG = "ManufacturersActivity";
     private ListView listView;
