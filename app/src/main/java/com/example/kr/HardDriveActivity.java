@@ -23,7 +23,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
-public class HardDriveActivity extends AppCompatActivity {
+public class HardDriveActivity extends BaseActivity {
 
     private static final String TAG = "HardDriveActivity";
     private ListView listView;
@@ -119,9 +119,9 @@ public class HardDriveActivity extends AppCompatActivity {
 
 
     private void showFilterDialog() {
-        String[] filterOptions = {"Price (Low to High)", "Price (High to Low)", "Capacity (Low to High)", "Capacity (High to Low)", "Alphabetical"};
+        String[] filterOptions = {getString(R.string.pricelow), getString(R.string.pricehigh), getString(R.string.capacitylow), getString(R.string.capacityhigh), getString(R.string.alphabet)};
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("Выберите фильтр")
+        builder.setTitle(getString(R.string.selectfilter))
                 .setItems(filterOptions, (dialog, which) -> {
                     switch (which) {
                         case 0:
@@ -168,7 +168,7 @@ public class HardDriveActivity extends AppCompatActivity {
     }
 
 
-    private static class HardDrive {
+    private class HardDrive {
         private String model;
         private long capacity;
         private double price;
@@ -194,7 +194,7 @@ public class HardDriveActivity extends AppCompatActivity {
         @NonNull
         @Override
         public String toString() {
-            return model + " | Capacity: " + capacity + " GB | Price: $" + price;
+            return model + " | " + getString(R.string.capacity) + " "  + capacity + " GB |  " + getString(R.string.price) + " $" + price;
         }
     }
 }

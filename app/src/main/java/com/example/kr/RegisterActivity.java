@@ -12,6 +12,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 public class RegisterActivity extends BaseActivity {
 
@@ -21,6 +22,7 @@ public class RegisterActivity extends BaseActivity {
     private Button btnRegister;
     private Button btnBack;
     private FirebaseAuth mAuth;
+    private FirebaseFirestore db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,6 +30,7 @@ public class RegisterActivity extends BaseActivity {
         setContentView(R.layout.activity_register);
 
         mAuth = FirebaseAuth.getInstance();
+        db = FirebaseFirestore.getInstance();
 
         editTextEmail = findViewById(R.id.editTextEmail);
         editTextPassword = findViewById(R.id.editTextPassword);
@@ -55,22 +58,22 @@ public class RegisterActivity extends BaseActivity {
 
     private void registerUser(String email, String password, String confirmPassword) {
         if (TextUtils.isEmpty(email)) {
-            Toast.makeText(getApplicationContext(), "Введите email!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), getString(R.string.entere), Toast.LENGTH_SHORT).show();
             return;
         }
 
         if (TextUtils.isEmpty(password)) {
-            Toast.makeText(getApplicationContext(), "Введите пароль!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), getString(R.string.enterp), Toast.LENGTH_SHORT).show();
             return;
         }
 
         if (!password.equals(confirmPassword)) { // Проверяем совпадение паролей
-            Toast.makeText(getApplicationContext(), "Пароли не совпадают!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), getString(R.string.missm), Toast.LENGTH_SHORT).show();
             return;
         }
 
         if (password.length() < 6) {
-            Toast.makeText(getApplicationContext(), "Минимальное количество символов в пароле 6", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), getString(R.string.minimum), Toast.LENGTH_SHORT).show();
             return;
         }
 
@@ -78,12 +81,25 @@ public class RegisterActivity extends BaseActivity {
                 .addOnCompleteListener(this, task -> {
                     if (task.isSuccessful()) {
                         FirebaseUser user = mAuth.getCurrentUser();
-                        updateUI(user);
+                        if (user != null) {
+                            addUserToFirestore(user);
+                        }
                     } else {
-                        Toast.makeText(RegisterActivity.this, "Ошибка регистрации. Попробуйте снова.",
+                        Toast.makeText(RegisterActivity.this, getString(R.string.regerror),
                                 Toast.LENGTH_SHORT).show();
-                        updateUI(null);
                     }
+                });
+    }
+
+    private void addUserToFirestore(FirebaseUser user) {
+        User newUser = new User(user.getEmail(), "user");
+        db.collection("users").document(user.getUid()).set(newUser)
+                .addOnSuccessListener(aVoid -> {
+                    updateUI(user);
+                })
+                .addOnFailureListener(e -> {
+                    Toast.makeText(RegisterActivity.this, "Ошибка при регистрации пользователя", Toast.LENGTH_SHORT).show();
+                    updateUI(null);
                 });
     }
 

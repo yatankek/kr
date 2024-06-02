@@ -9,11 +9,13 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Toast;
+
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 public class LoginActivity extends BaseActivity {
 
@@ -23,6 +25,7 @@ public class LoginActivity extends BaseActivity {
     private Button btnLogin, btnBack;
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener authStateListener;
+    private FirebaseFirestore db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +38,7 @@ public class LoginActivity extends BaseActivity {
         btnLogin = findViewById(R.id.btnLogin);
         btnBack = findViewById(R.id.btnBack);
         mAuth = FirebaseAuth.getInstance();
+        db = FirebaseFirestore.getInstance();
 
         // Load the saved state of the "Remember Me" checkbox
         SharedPreferences prefs = getSharedPreferences("prefs", MODE_PRIVATE);
@@ -49,7 +53,7 @@ public class LoginActivity extends BaseActivity {
                 if (!email.isEmpty() && !password.isEmpty()) {
                     loginUser(email, password);
                 } else {
-                    Toast.makeText(LoginActivity.this, "Заполните все поля", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(LoginActivity.this, getString(R.string.fill), Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -69,7 +73,7 @@ public class LoginActivity extends BaseActivity {
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
                 FirebaseUser user = firebaseAuth.getCurrentUser();
                 if (user != null && checkboxRememberMe.isChecked()) {
-                    openHomeActivity();
+                    checkUserRole(user.getUid());
                 }
             }
         };
@@ -81,10 +85,13 @@ public class LoginActivity extends BaseActivity {
                     if (task.isSuccessful()) {
                         Log.d(TAG, "signInWithEmail:success");
                         saveRememberMeState();
-                        openHomeActivity();
+                        FirebaseUser user = mAuth.getCurrentUser();
+                        if (user != null) {
+                            checkUserRole(user.getUid());
+                        }
                     } else {
                         Log.w(TAG, "signInWithEmail:failure", task.getException());
-                        Toast.makeText(LoginActivity.this, "Ошибка входа", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(LoginActivity.this, getString(R.string.loginerror), Toast.LENGTH_SHORT).show();
                     }
                 });
     }
@@ -95,10 +102,24 @@ public class LoginActivity extends BaseActivity {
         editor.apply();
     }
 
-    private void openHomeActivity() {
-        Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
-        startActivity(intent);
-        finish(); // Закрываем LoginActivity, чтобы пользователь не мог вернуться назад
+    private void checkUserRole(String userId) {
+        db.collection("users").document(userId).get()
+                .addOnSuccessListener(documentSnapshot -> {
+                    if (documentSnapshot.exists()) {
+                        String role = documentSnapshot.getString("role");
+                        if ("admin".equals(role)) {
+                            startActivity(new Intent(LoginActivity.this, AdminActivity.class));
+                        } else {
+                            startActivity(new Intent(LoginActivity.this, HomeActivity.class));
+                        }
+                        finish();
+                    } else {
+                        Toast.makeText(LoginActivity.this, "Ошибка при получении данных пользователя", Toast.LENGTH_SHORT).show();
+                    }
+                })
+                .addOnFailureListener(e -> {
+                    Toast.makeText(LoginActivity.this, "Ошибка при получении данных пользователя", Toast.LENGTH_SHORT).show();
+                });
     }
 
     @Override

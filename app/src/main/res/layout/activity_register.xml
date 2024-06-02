@@ -7,13 +7,13 @@
         android:id="@+id/editTextEmail"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Электронная почта" />
+        android:hint="@string/email" />
 
     <EditText
         android:id="@+id/editTextPassword"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="пароль"
+        android:hint="@string/password"
         android:layout_below="@id/editTextEmail"
         android:layout_marginTop="16dp"
         android:inputType="textPassword" />
@@ -22,7 +22,7 @@
         android:id="@+id/editTextConfirmPassword"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="подтвердите пароль"
+        android:hint="@string/confirmpas"
         android:layout_below="@id/editTextPassword"
         android:layout_marginTop="16dp"
         android:inputType="textPassword" />
@@ -31,7 +31,7 @@
         android:id="@+id/btnRegister"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Регистрация"
+        android:text="@string/reg"
         android:layout_below="@id/editTextConfirmPassword"
         android:layout_marginTop="16dp" />
 
@@ -39,7 +39,7 @@
         android:id="@+id/btnBack"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Назад"
+        android:text="@string/back"
         android:layout_below="@id/btnRegister"
         android:layout_alignParentStart="true"
         android:layout_marginTop="16dp" />

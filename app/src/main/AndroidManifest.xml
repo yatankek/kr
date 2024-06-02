@@ -13,6 +13,9 @@
         android:theme="@style/Theme.Kr"
         tools:targetApi="31">
         <activity
+            android:name=".AdminActivity"
+            android:exported="false" />
+        <activity
             android:name=".HardDriveDetailActivity"
             android:exported="false" />
         <activity

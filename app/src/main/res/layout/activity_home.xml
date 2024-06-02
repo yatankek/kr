@@ -8,7 +8,7 @@
         android:id="@+id/textWelcomeMessage"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Добро пожаловать в информационно-справочную систему 'Жесткие диски'. Нажмите на кнопку 'производители' для того, чтобы открыть список всех производителей."
+        android:text="@string/welcome"
         android:textSize="18sp"
         android:textStyle="bold"
         android:layout_margin="16dp"

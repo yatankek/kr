@@ -7,7 +7,7 @@
         android:id="@+id/textViewModel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Model: "
+        android:text="@string/model"
         android:textSize="18sp"
         android:layout_marginBottom="8dp"/>
 
@@ -15,7 +15,7 @@
         android:id="@+id/textViewCapacity"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Capacity: "
+        android:text="@string/capacity"
         android:textSize="18sp"
         android:layout_below="@id/textViewModel"
         android:layout_marginBottom="8dp"/>
@@ -24,7 +24,7 @@
         android:id="@+id/textViewPrice"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Price: "
+        android:text="@string/price"
         android:textSize="18sp"
         android:layout_below="@id/textViewCapacity"
         android:layout_marginBottom="8dp"/>
@@ -33,7 +33,7 @@
         android:id="@+id/textViewDescription"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Description: "
+        android:text="@string/description"
         android:textSize="18sp"
         android:layout_below="@id/textViewPrice"
         android:layout_marginBottom="8dp"/>

@@ -54,14 +54,14 @@ public class HomeActivity extends BaseActivity {
 
     private void logoutUser() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this,R.style.AlertTheme);
-        builder.setMessage("Вы уверены, что хотите выйти?")
-                .setPositiveButton("Да", (dialog, which) -> {
+        builder.setMessage(getString(R.string.logout))
+                .setPositiveButton(getString(R.string.yes), (dialog, which) -> {
                     mAuth.signOut();
                     Intent intent = new Intent(HomeActivity.this, MainActivity.class);
                     startActivity(intent);
                     finish(); // Закрываем HomeActivity, чтобы пользователь не мог вернуться назад
                 })
-                .setNegativeButton("Отмена", null)
+                .setNegativeButton(getString(R.string.cancel), null)
                 .show();
     }
 
@@ -82,16 +82,16 @@ public class HomeActivity extends BaseActivity {
     private void showLanguageDialog() {
         String[] languages = {getString(R.string.russian), getString(R.string.english)};
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("Выберите язык")
+        builder.setTitle(getString(R.string.chooseln))
                 .setItems(languages, (dialog, which) -> {
                     switch (which) {
                         case 0:
                             changeLanguage("ru");
-                            Toast.makeText(HomeActivity.this, "Русский язык выбран", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(HomeActivity.this, getString(R.string.ruselected), Toast.LENGTH_SHORT).show();
                             break;
                         case 1:
                             changeLanguage("en");
-                            Toast.makeText(HomeActivity.this, "Английский язык выбран", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(HomeActivity.this, getString(R.string.enselected), Toast.LENGTH_SHORT).show();
                             break;
                     }
                 });
@@ -99,9 +99,9 @@ public class HomeActivity extends BaseActivity {
     }
 
     private void showThemeDialog() {
-        String[] themes = {"Красный (Светлый)", "Красный (Тёмный)", "Коричневый (Светлый)", "Коричневый (Тёмный)"};
+        String[] themes = {getString(R.string.redl), getString(R.string.redd), getString(R.string.brownl), getString(R.string.brownd)};
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("Выберите тему")
+        builder.setTitle(getString(R.string.chooseth))
                 .setItems(themes, (dialog, which) -> {
                     switch (which) {
                         case 0:

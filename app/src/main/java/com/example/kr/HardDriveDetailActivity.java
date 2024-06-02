@@ -68,12 +68,12 @@ public class HardDriveDetailActivity extends BaseActivity {
                             String description = document.getString(descriptionField);
 
                             if (model != null && capacity != null && price != null && description != null) {
-                                textViewModel.setText("Название модели: " + model);
-                                textViewCapacity.setText("Ёмкость диска: " + capacity + " GB");
-                                textViewPrice.setText("Цена: $" + String.format("%.2f", price));
-                                textViewDescription.setText("Описание: " + description);
+                                textViewModel.setText(getString(R.string.model) + " " + model);
+                                textViewCapacity.setText(getString(R.string.capacity) + " " + capacity + " GB");
+                                textViewPrice.setText(getString(R.string.price) + " $" + String.format("%.2f", price));
+                                textViewDescription.setText(getString(R.string.description) + " " + description);
                             } else {
-                                Toast.makeText(this, "Ошибка при загрузке данных.", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(this, getString(R.string.errorload), Toast.LENGTH_SHORT).show();
                             }
                         } else {
                             Toast.makeText(this, "Документ не найден.", Toast.LENGTH_SHORT).show();
