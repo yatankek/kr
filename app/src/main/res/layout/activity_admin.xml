@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <EditText
+            android:id="@+id/editTextHDDModel"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/model" />
+
+        <EditText
+            android:id="@+id/editTextHDDCapacity"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/capacity" />
+
+        <EditText
+            android:id="@+id/editTextHDDDescEn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/descen" />
+
+        <EditText
+            android:id="@+id/editTextHDDDescRu"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/descru" />
+
+        <EditText
+            android:id="@+id/editTextHDDPrice"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/price" />
+
+        <Button
+            android:id="@+id/btnAddHDD"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/addhdd" />
+
+        <Button
+            android:id="@+id/btnDeleteHDD"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/deletehdd" />
+
+        <Button
+            android:id="@+id/btnAddManufacturer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/addm" />
+
+        <Button
+            android:id="@+id/btnDeleteManufacturer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/deletem" />
+
+        <Button
+            android:id="@+id/btnGoHome"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/mains" />
+
+    </LinearLayout>
+</ScrollView>
