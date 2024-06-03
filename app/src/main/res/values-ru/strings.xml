@@ -3,7 +3,7 @@
     <string name="app_name"> </string>
     <string name="russian">русский</string>
     <string name="english">английский</string>
-    <string name="pricehigh">Цена по возрастанию</string>
+    <string name="pricehigh">Цена по убыванию</string>
     <string name="model">"Модель: "</string>
     <string name="searchbymodel">поиск по моделям</string>
     <string name="filter">фильтр</string>
@@ -66,4 +66,10 @@
     <string name="deletehdd">Удалить жёсткий диск</string>
     <string name="deletem">Удалить производителя</string>
     <string name="mains">Главный экран</string>
+    <string name="man">Производители</string>
+    <string name="Logoutha">Выход</string>
+    <string name="lan">Язык</string>
+    <string name="Theme">Тема</string>
+    <string name="choose_option">Выберите опцию</string>
+    <string name="admin">админ</string>
 </resources>

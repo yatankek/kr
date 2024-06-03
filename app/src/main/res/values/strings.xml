@@ -65,4 +65,10 @@
     <string name="deletehdd">Delete a hard drive</string>
     <string name="deletem">Remove manufacturer</string>
     <string name="mains">Main screen</string>
+    <string name="man">Manufacturers</string>
+    <string name="Logoutha">Logout</string>
+    <string name="lan">Language</string>
+    <string name="Theme">Theme</string>
+    <string name="choose_option">Choose option</string>
+    <string name="admin">admin</string>
 </resources>
