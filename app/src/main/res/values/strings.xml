@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name"> </string>
+    <string name="app_name">HDDinfo</string>
     <string name="russian">russian</string>
     <string name="english">english</string>
     <string name="pricehigh">price(high to low)</string>
