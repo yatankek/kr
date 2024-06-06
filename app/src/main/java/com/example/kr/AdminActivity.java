@@ -119,7 +119,7 @@ public class AdminActivity extends BaseActivity {
                 Map<String, String> hddToManufacturerMap = new HashMap<>();
                 for (DocumentSnapshot document : querySnapshot) {
                     String hddPath = document.getReference().getPath();
-                    String manufacturer = hddPath.split("/")[1]; // Получаем производителя из пути документа
+                    String manufacturer = hddPath.split("/")[1];
                     String model = document.getId();
                     harddrives.add(manufacturer + " - " + model);
                     hddToManufacturerMap.put(manufacturer + " - " + model, manufacturer);

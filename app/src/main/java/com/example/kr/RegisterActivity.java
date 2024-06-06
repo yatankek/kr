@@ -18,7 +18,7 @@ public class RegisterActivity extends BaseActivity {
 
     private EditText editTextEmail;
     private EditText editTextPassword;
-    private EditText editTextConfirmPassword; // Новое поле для подтверждения пароля
+    private EditText editTextConfirmPassword;
     private Button btnRegister;
     private Button btnBack;
     private FirebaseAuth mAuth;
@@ -34,7 +34,7 @@ public class RegisterActivity extends BaseActivity {
 
         editTextEmail = findViewById(R.id.editTextEmail);
         editTextPassword = findViewById(R.id.editTextPassword);
-        editTextConfirmPassword = findViewById(R.id.editTextConfirmPassword); // Новое поле для подтверждения пароля
+        editTextConfirmPassword = findViewById(R.id.editTextConfirmPassword);
         btnRegister = findViewById(R.id.btnRegister);
         btnBack = findViewById(R.id.btnBack);
 
@@ -43,15 +43,15 @@ public class RegisterActivity extends BaseActivity {
             public void onClick(View v) {
                 String email = editTextEmail.getText().toString();
                 String password = editTextPassword.getText().toString();
-                String confirmPassword = editTextConfirmPassword.getText().toString(); // Получаем подтверждение пароля
-                registerUser(email, password, confirmPassword); // Передаем в метод регистрации оба пароля
+                String confirmPassword = editTextConfirmPassword.getText().toString();
+                registerUser(email, password, confirmPassword);
             }
         });
 
         btnBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                finish(); // Закрываем LoginActivity и возвращаемся на предыдущий экран
+                finish();
             }
         });
     }
@@ -67,7 +67,7 @@ public class RegisterActivity extends BaseActivity {
             return;
         }
 
-        if (!password.equals(confirmPassword)) { // Проверяем совпадение паролей
+        if (!password.equals(confirmPassword)) {
             Toast.makeText(getApplicationContext(), getString(R.string.missm), Toast.LENGTH_SHORT).show();
             return;
         }

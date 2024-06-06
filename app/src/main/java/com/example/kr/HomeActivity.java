@@ -52,8 +52,8 @@ public class HomeActivity extends BaseActivity {
 
     private void setupBottomNavigation() {
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
-        bottomNavigationView.getMenu().clear(); // Сначала очищаем меню
-        bottomNavigationView.inflateMenu(R.menu.bottom_navigation_menu); // Затем инфлейтим наше меню
+        bottomNavigationView.getMenu().clear();
+        bottomNavigationView.inflateMenu(R.menu.bottom_navigation_menu);
 
         if (isAdmin) {
             bottomNavigationView.getMenu().add(Menu.NONE, R.id.action_admin, Menu.NONE, getString(R.string.admin))
@@ -111,7 +111,6 @@ public class HomeActivity extends BaseActivity {
         configuration.locale = locale;
         getResources().updateConfiguration(configuration, getResources().getDisplayMetrics());
 
-        // Перезагрузить активность
         Intent intent = getIntent();
         finish();
         startActivity(intent);

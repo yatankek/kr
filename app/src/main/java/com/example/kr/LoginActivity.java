@@ -40,7 +40,6 @@ public class LoginActivity extends BaseActivity {
         mAuth = FirebaseAuth.getInstance();
         db = FirebaseFirestore.getInstance();
 
-        // Load the saved state of the "Remember Me" checkbox
         SharedPreferences prefs = getSharedPreferences("prefs", MODE_PRIVATE);
         boolean rememberMe = prefs.getBoolean("rememberMe", false);
         checkboxRememberMe.setChecked(rememberMe);
@@ -61,7 +60,6 @@ public class LoginActivity extends BaseActivity {
         btnBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Go back to MainActivity
                 Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                 startActivity(intent);
                 finish();
